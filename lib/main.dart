@@ -1,8 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:zoomart/presentation/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:zoomart/presentation/services/api_manager.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform
+    // options: FirebaseOptions(
+    // apiKey: "AIzaSyCCeuR7rxVqlnXVdQhti4V6UOOU510UpOc",
+    // appId: "1:449679109705:android:50b98cde25cb4638155998",
+    // messagingSenderId: "449679109705",
+    // projectId: "zoomart-30f24",),
+  );
   runApp(const MyApp());
 }
 

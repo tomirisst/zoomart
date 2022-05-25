@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "449679109705",
+    "firebase_url": "https://zoomart-30f24-default-rtdb.firebaseio.com",
+    "project_id": "zoomart-30f24",
+    "storage_bucket": "zoomart-30f24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449679109705:android:50b98cde25cb4638155998",
+        "android_client_info": {
+          "package_name": "com.example.zoomart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "449679109705-q7go1n8lc023a6e1blvi1h7r081mu8uu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCeuR7rxVqlnXVdQhti4V6UOOU510UpOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "449679109705-q7go1n8lc023a6e1blvi1h7r081mu8uu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "449679109705-n3ea4ncbm7mvh0m8t1atf60as6dilkji.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.zoomart"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

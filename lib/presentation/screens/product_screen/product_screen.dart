@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/components/custom_button.dart';
 import 'package:zoomart/presentation/screens/like_screen/like_presenter.dart';
+import 'package:zoomart/presentation/services/cart_manager.dart';
 
 import '../../models/goods_model.dart';
 
@@ -120,7 +122,9 @@ class _ProductScreenState extends State<ProductScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    CustomButton(onClicked: () {}, text: "Add to cart"),
+                    CustomButton(onClicked: () {
+                      addProductToCart(widget.good);
+                    }, text: "Add to cart"),
                   ],
                 ),
               ),
