@@ -41,10 +41,15 @@ class ProductCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 100,
-            width: 100,
-            child: Image.network(image),
+          Align(
+            alignment: Alignment.topLeft,
+            child: SizedBox(
+              height: 140,
+              width: 110,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Image.network(image, fit: BoxFit.fitHeight,)),
+            ),
           ),
           const SizedBox(
             width: 15,
@@ -80,7 +85,8 @@ class ProductCard extends StatelessWidget {
                         Flexible(
                           child: Text(
                             description,
-                            overflow: TextOverflow.fade,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -89,7 +95,7 @@ class ProductCard extends StatelessWidget {
                         ),
                       ],
                     )
-                    : CustomButton(onClicked: () {}, text: "Buy"),
+                    : Container()//CustomButton(onClicked: () {}, text: "Buy"),
               ],
             ),
           ),

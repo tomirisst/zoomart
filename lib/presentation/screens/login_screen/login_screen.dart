@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextField(
                         controller: _presenter.emailController,
                         cursorColor: AppColors.primaryColor,
-                        obscureText: true,
+                        obscureText: false,
                         decoration: const InputDecoration(
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: AppColors.primaryColor),

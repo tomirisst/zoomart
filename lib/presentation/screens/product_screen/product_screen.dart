@@ -52,8 +52,9 @@ class _ProductScreenState extends State<ProductScreen> {
                     children: [
                       SizedBox(
                         height: 150,
-                        child: Center(
-                          child: Image.network(widget.good.photo!),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: Image.network(widget.good.photo!, fit: BoxFit.fitHeight,),
                         ),
                       ),
                       const SizedBox(
@@ -119,7 +120,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    CustomButton(onClicked: () {}, text: "Buy now"),
+                    CustomButton(onClicked: () {}, text: "Add to cart"),
                   ],
                 ),
               ),

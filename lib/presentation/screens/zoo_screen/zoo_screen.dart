@@ -6,6 +6,7 @@ import 'package:zoomart/presentation/screens/zoo_screen/zoo_view_model.dart';
 
 import '../../../constants/app_colors.dart';
 import '../../base/base_screen_state.dart';
+import '../../models/pets_model.dart';
 
 class ZooScreen extends StatefulWidget {
   const ZooScreen({Key? key}) : super(key: key);
@@ -16,6 +17,23 @@ class ZooScreen extends StatefulWidget {
 
 class _ZooScreenState extends State<ZooScreen> {
   final ZooPresenter _presenter = ZooPresenter(ZooViewModel(ScreenState.none));
+  //api
+  List<Pets> pets = [];
+
+  Future<void> getPets() async {
+    pets = await _presenter.pets;
+    setState(() {});
+    return;
+  }
+
+  @override
+  void initState() {
+    setState(() {
+      getPets();
+    });
+    super.initState();
+  }
+  //api
 
   @override
   void didChangeDependencies() {
@@ -123,25 +141,26 @@ class _ZooScreenState extends State<ZooScreen> {
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 padding: EdgeInsets.zero,
-                itemCount: _presenter.dogs.length,
+                itemCount: pets.length,
                 itemBuilder: (context, index) {
+                  var pet = pets[index];
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => PetScreen(
-                            testDog: _presenter.dogs[index],
+                            pet: pet,
                           ),
                         ),
                       );
                     },
                     child: AnimalCard(
-                      image: _presenter.dogs[index].image,
-                      title: _presenter.dogs[index].name,
-                      description: _presenter.dogs[index].description,
+                      image: pet.photos!,
+                      title: pet.name!,
+                      description: pet.description!,
                       isLiked: index == 1 ? false : true,
-                      location: _presenter.dogs[index].location,
+                      location: pet.city!,
                     ),
                   );
                 },

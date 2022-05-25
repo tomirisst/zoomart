@@ -5,6 +5,7 @@ import 'package:zoomart/presentation/screens/like_screen/like_presenter.dart';
 import 'package:zoomart/presentation/screens/like_screen/like_view_model.dart';
 
 import '../../base/base_screen_state.dart';
+import '../../components/custom_button.dart';
 
 class LikeScreen extends StatefulWidget {
   const LikeScreen({Key? key}) : super(key: key);
@@ -58,6 +59,16 @@ class _LikeScreenState extends State<LikeScreen> {
               },
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 26),
+            child: Row(
+              children: [
+                Expanded(
+                  child: CustomButton(onClicked: () {},text: "Buy",),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

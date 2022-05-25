@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/components/custom_button.dart';
+import 'package:zoomart/presentation/screens/pet_screen/pet_presenter.dart';
+import 'package:zoomart/presentation/screens/pet_screen/pet_view_model.dart';
 import 'package:zoomart/presentation/screens/zoo_screen/zoo_presenter.dart';
+import 'package:zoomart/presentation/services/api_manager.dart';
+
+import '../../models/pets_model.dart';
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 class PetScreen extends StatefulWidget {
-  final TestDog testDog;
+  final Pets pet;
 
-  const PetScreen({Key? key, required this.testDog}) : super(key: key);
+  const PetScreen({Key? key, required this.pet}) : super(key: key);
 
   @override
   _PetScreenState createState() => _PetScreenState();
@@ -57,9 +65,12 @@ class _PetScreenState extends State<PetScreen> {
                     children: [
                       SizedBox(
                         height: 200,
-                        child: Image.asset(
-                          widget.testDog.image,
-                          fit: BoxFit.fitHeight,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(32),
+                          child: Image.network(
+                            widget.pet.photos!,
+                            fit: BoxFit.fitHeight,
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -82,7 +93,7 @@ class _PetScreenState extends State<PetScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.testDog.name,
+                          widget.pet.name!,
                           style: const TextStyle(
                             fontSize: 24,
                             color: AppColors.black,
@@ -99,7 +110,7 @@ class _PetScreenState extends State<PetScreen> {
                               color: AppColors.primaryColor,
                             ),
                             Text(
-                              widget.testDog.location,
+                              widget.pet.city!,
                               style: TextStyle(
                                 fontSize: 14,
                                 color: AppColors.black.withOpacity(0.4),
@@ -138,7 +149,7 @@ class _PetScreenState extends State<PetScreen> {
                               width: 16,
                             ),
                             Text(
-                              widget.testDog.name,
+                              widget.pet.name!,
                               style: const TextStyle(
                                 fontSize: 14,
                                 color: AppColors.black,
@@ -188,7 +199,7 @@ class _PetScreenState extends State<PetScreen> {
                           children: [
                             Flexible(
                               child: Text(
-                                widget.testDog.description,
+                                widget.pet.description!,
                                 style: const TextStyle(
                                   fontSize: 14,
                                   color: AppColors.primaryColor,
@@ -206,7 +217,7 @@ class _PetScreenState extends State<PetScreen> {
                           child: Flexible(
                             child: ListView.builder(
                                 shrinkWrap: true,
-                                itemCount: 3,
+                                itemCount: 1,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) {
                                   return Container(
@@ -228,7 +239,7 @@ class _PetScreenState extends State<PetScreen> {
                                     ),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(32),
-                                      child: Image.asset("assets/images/dog_${index + 1}.png"),
+                                      child: Image.network(widget.pet.photos!),
                                     ),
                                   );
                                 }),
@@ -237,7 +248,30 @@ class _PetScreenState extends State<PetScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        CustomButton(onClicked: () {}, text: "Adopt now"),
+                        // ElevatedButton(
+                        //     onPressed: () async {
+                        //       await FlutterPhoneDirectCaller.callNumber(widget.pet.ownerNumber!);
+                        //     },
+                        //     child: Text("Adopt now")
+                        // ),
+                        CustomButton(
+                            onClicked: () async {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: Text("Pop up"),
+                                    content: Text("Call me on my cellphone"),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () async{
+                                            await FlutterPhoneDirectCaller.callNumber(widget.pet.ownerNumber!);
+                                          },
+                                          child: Text("Call")),
+                                    ],
+                                  ));
+
+                            },
+                            text: "Adopt now"),
                       ],
                     ),
                   ),

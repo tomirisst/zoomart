@@ -84,7 +84,8 @@ class AnimalCard extends StatelessWidget {
                           Flexible(
                             child: Text(
                               description,
-                              overflow: TextOverflow.fade,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -128,8 +129,10 @@ class AnimalCard extends StatelessWidget {
             alignment: Alignment.topLeft,
             child: SizedBox(
               height: 140,
-              width: 130,
-              child: Image.asset(image, fit: BoxFit.fitHeight,),
+              width: 110,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Image.network(image, fit: BoxFit.fitHeight,)),
             ),
           )
         ],

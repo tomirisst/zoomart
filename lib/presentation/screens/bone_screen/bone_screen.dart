@@ -18,7 +18,7 @@ class BoneScreen extends StatefulWidget {
 
 class _BoneScreenState extends State<BoneScreen> {
   final BonePresenter _presenter = BonePresenter(BoneViewModel(ScreenState.none));
-  //tomi
+  //api
   List<Goods> goods = [];
 
   Future<void> getGoods() async {
@@ -34,7 +34,7 @@ class _BoneScreenState extends State<BoneScreen> {
     });
     super.initState();
   }
-  //tomi
+  //api
   @override
   void didChangeDependencies() {
     _presenter.initWithContext(context);
