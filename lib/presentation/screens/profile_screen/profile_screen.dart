@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/screens/profile_screen/profile_presenter.dart';
@@ -93,7 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ProfileCard(onTap: () {}, text: "Payment Details"),
               ProfileCard(onTap: () {}, text: "Orders"),
               ProfileCard(onTap: () {}, text: "Politics & Docs"),
-              ProfileCard(onTap: () {}, text: "Logout"),
+              ProfileCard(onTap: () => FirebaseAuth.instance.signOut(), text: "Log Out"),
             ],
           ),
         ),

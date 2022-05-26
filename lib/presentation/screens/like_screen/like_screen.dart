@@ -67,20 +67,6 @@ class _LikeScreenState extends State<LikeScreen> {
                             showDesc: false,
                             quantity: 1,
                           ),
-                          // Padding(
-                          //   padding: const EdgeInsets.symmetric(
-                          //       horizontal: 24, vertical: 26),
-                          //   child: Row(
-                          //     children: [
-                          //       Expanded(
-                          //         child: CustomButton(
-                          //           onClicked: () {},
-                          //           text: "Buy",
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // )
                         ],
                       );
                     }).toList(),

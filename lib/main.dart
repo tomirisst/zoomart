@@ -7,13 +7,7 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform
-    // options: FirebaseOptions(
-    // apiKey: "AIzaSyCCeuR7rxVqlnXVdQhti4V6UOOU510UpOc",
-    // appId: "1:449679109705:android:50b98cde25cb4638155998",
-    // messagingSenderId: "449679109705",
-    // projectId: "zoomart-30f24",),
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
