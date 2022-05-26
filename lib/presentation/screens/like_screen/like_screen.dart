@@ -7,6 +7,7 @@ import 'package:zoomart/presentation/screens/like_screen/like_view_model.dart';
 
 import '../../base/base_screen_state.dart';
 import '../../components/custom_button.dart';
+import '../delivery_screen/delivery_screen.dart';
 
 class LikeScreen extends StatefulWidget {
   const LikeScreen({Key? key}) : super(key: key);
@@ -79,7 +80,13 @@ class _LikeScreenState extends State<LikeScreen> {
               children: [
                 Expanded(
                   child: CustomButton(
-                    onClicked: () {},
+                    onClicked: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DeliveryScreen(),),
+                      );
+                    },
                     text: "Buy",
                   ),
                 ),
