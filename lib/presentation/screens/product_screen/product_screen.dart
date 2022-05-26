@@ -123,7 +123,17 @@ class _ProductScreenState extends State<ProductScreen> {
                       height: 15,
                     ),
                     CustomButton(onClicked: () {
-                      addProductToCart(widget.good);
+                      if(!widget.good.isInCart!) {
+                        widget.good.isInCart = !widget.good.isInCart!;
+                        const snackBar = SnackBar(
+                            content: Text('Added to Cart'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        addProductToCart(widget.good);
+                      } else {
+                        const snackBar = SnackBar(
+                            content: Text('Already in Cart'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
                     }, text: "Add to cart"),
                   ],
                 ),

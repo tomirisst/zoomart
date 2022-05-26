@@ -4,13 +4,15 @@ class Goods {
   final String? description;
   final String? price;
   final String? photo;
+  bool? isInCart;
 
-  const Goods({
+  Goods({
     required this.id,
     required this.name,
     required this.description,
     required this.price,
     required this.photo,
+    required this.isInCart,
   });
 
   factory Goods.fromJson(Map<String, dynamic> json) {
@@ -21,6 +23,7 @@ class Goods {
       price: json['price'],
       //!.toDouble()
       photo: json['photo'],
+      isInCart: false
     );
   }
 }
