@@ -43,8 +43,10 @@ List<BottomNavigationBarItem> bottomNavigationBarItems(index) {
           depth: index == 2 ? -5 : 5,
           color: AppColors.background,
         ),
-        child: SvgPicture.asset(
-          'assets/icons/ic_like.svg',
+        child: Image.asset(
+          'assets/icons/ic_cart.png',
+          width: 30,
+          height: 30,
           color: index == 2 ? AppColors.primaryColor : AppColors.black.withOpacity(0.5),
         ),
       ),

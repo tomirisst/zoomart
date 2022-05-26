@@ -7,14 +7,12 @@ class AnimalCard extends StatelessWidget {
   final String title;
   final String location;
   final String description;
-  final bool isLiked;
 
   const AnimalCard({
     Key? key,
     required this.image,
     required this.title,
     required this.description,
-    required this.isLiked,
     required this.location,
   }) : super(key: key);
 
@@ -95,31 +93,6 @@ class AnimalCard extends StatelessWidget {
                         ],
                       )
                     ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    height: 25,
-                    width: 25,
-                    padding: EdgeInsets.zero,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: AppColors.background,
-                      boxShadow: [
-                        BoxShadow(
-                            color: AppColors.primaryColor.withOpacity(0.3),
-                            blurRadius: 15,
-                            spreadRadius: 2,
-                            offset: const Offset(7, 7))
-                      ],
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        isLiked ? "assets/icons/ic_heart.svg" : "assets/icons/ic_heart_not_filled.svg",
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
                   ),
                 ),
               ],
