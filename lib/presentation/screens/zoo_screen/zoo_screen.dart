@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zoomart/presentation/screens/navigation/loading_screen.dart';
 import 'package:zoomart/presentation/screens/pet_screen/pet_screen.dart';
 import 'package:zoomart/presentation/screens/zoo_screen/widgets/animal_card.dart';
 import 'package:zoomart/presentation/screens/zoo_screen/zoo_presenter.dart';
@@ -19,10 +20,13 @@ class _ZooScreenState extends State<ZooScreen> {
   final ZooPresenter _presenter = ZooPresenter(ZooViewModel(ScreenState.none));
   //api
   List<Pets> pets = [];
+  bool isLoading = false;
 
   Future<void> getPets() async {
+    setState(() => isLoading = true);
     pets = await _presenter.pets;
-    setState(() {});
+    await Future.delayed(const Duration(seconds: 1));
+    setState(() => isLoading = false);
     return;
   }
 
@@ -42,8 +46,8 @@ class _ZooScreenState extends State<ZooScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => isLoading ? const LoadingScreen() :
+     Scaffold(
       body: SafeArea(
         child: Column(
           children: [
@@ -170,4 +174,4 @@ class _ZooScreenState extends State<ZooScreen> {
       ),
     );
   }
-}
+// }

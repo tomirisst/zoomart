@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/screens/bone_screen/bone_screen.dart';
 import 'package:zoomart/presentation/screens/like_screen/like_screen.dart';
+import 'package:zoomart/presentation/screens/navigation/loading_screen.dart';
 import 'package:zoomart/presentation/screens/navigation/widgets/navigation_bar_items.dart';
 import 'package:zoomart/presentation/screens/profile_screen/profile_screen.dart';
 import 'package:zoomart/presentation/screens/zoo_screen/zoo_screen.dart';
@@ -14,7 +15,6 @@ class NavigationScreen extends StatefulWidget {
 }
 
 class _NavigationScreenState extends State<NavigationScreen> {
-
   int selectedPageIndex = 0;
   final List<Widget> _pages = [
     ZooScreen(),

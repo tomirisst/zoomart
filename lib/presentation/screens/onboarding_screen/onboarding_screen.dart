@@ -73,7 +73,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Navigator.push(
                             context, MaterialPageRoute(builder: (context) => LoginScreen()));
                       },
-                      text: "Skip",
+                      text: "Let's Go",
                     ),
                   ),
                 ],
