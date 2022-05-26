@@ -54,7 +54,7 @@ class _LikeScreenState extends State<LikeScreen> {
                   price: _presenter.products[index].price,
                   description: _presenter.products[index].description,
                   showDesc: false,
-                  isLiked: true,
+                  quantity: 1,
                 );
               },
             ),

@@ -161,7 +161,7 @@ class _BoneScreenState extends State<BoneScreen> {
                       price: good.price!,
                       description: good.description!,
                       showDesc: true,
-                      isLiked: false,
+                      quantity: 1,
                     ),
                   );
                 },

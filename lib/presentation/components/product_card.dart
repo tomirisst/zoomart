@@ -4,24 +4,44 @@ import 'package:flutter_svg/svg.dart';
 import '../../constants/app_colors.dart';
 import 'custom_button.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   final String image;
   final String title;
   final String price;
   final String description;
   final bool showDesc;
-  final bool isLiked;
+  final int quantity;
 
-  const ProductCard({
-    Key? key,
+
+  ProductCard({
     required this.image,
     required this.title,
     required this.price,
     required this.description,
-    required this.isLiked,
     required this.showDesc,
-  }) : super(key: key);
+    required this.quantity});
+  @override
+  ProductCardState createState() => ProductCardState(image, title, price, description,showDesc, quantity);
+}
+class ProductCardState extends State<ProductCard> {
+  String image;
+  String title;
+  String price;
+  String description;
+  bool showDesc;
+  int quantity;
+  ProductCardState(this.image, this.title, this.price, this.description, this.showDesc,this.quantity);
+  void increment() {
+    setState(() {
+      quantity++;
+    });
+  }
 
+  void decrement() {
+    setState(() {
+      quantity--;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,15 +61,10 @@ class ProductCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: SizedBox(
-              height: 140,
-              width: 110,
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Image.network(image, fit: BoxFit.fitHeight,)),
-            ),
+          SizedBox(
+            height: 100,
+            width: 100,
+            child: Image.network(image),
           ),
           const SizedBox(
             width: 15,
@@ -69,7 +84,7 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "\$" + price,
+                  "\$ " + price,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
@@ -81,51 +96,43 @@ class ProductCard extends StatelessWidget {
                 ),
                 showDesc
                     ? Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            description,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
+                  children: [
+                    Flexible(
+                      child: Text(
+                        description,
+                        overflow: TextOverflow.fade,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
                         ),
+                      ),
+                    ),
+                  ],
+                )
+                    : Container(
+                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  child: Center(
+                    child: Row(
+                      children: [
+                        ChangeAmountButton(onClicked: increment, text: "+"),
+                        Text(quantity.toString(),
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: AppColors.black,
+                            fontWeight: FontWeight.bold,
+                          ),),
+                        ChangeAmountButton(onClicked: decrement, text: "-"),
                       ],
-                    )
-                    : Container()//CustomButton(onClicked: () {}, text: "Buy"),
-              ],
-            ),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: 25,
-              width: 25,
-              padding: EdgeInsets.zero,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: AppColors.background,
-                boxShadow: [
-                  BoxShadow(
-                      color: AppColors.primaryColor.withOpacity(0.3),
-                      blurRadius: 15,
-                      spreadRadius: 2,
-                      offset: const Offset(7, 7))
-                ],
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  isLiked ? "assets/icons/ic_heart.svg" : "assets/icons/ic_heart_not_filled.svg",
-                  fit: BoxFit.fitWidth,
+                    ),
+                  ),
                 ),
-              ),
+                // : CustomButton(onClicked: () {}, text: "Buy"),
+              ],
             ),
           ),
         ],
       ),
     );
   }
+
 }

@@ -159,7 +159,6 @@ class _ZooScreenState extends State<ZooScreen> {
                       image: pet.photos!,
                       title: pet.name!,
                       description: pet.description!,
-                      isLiked: index == 1 ? false : true,
                       location: pet.city!,
                     ),
                   );
