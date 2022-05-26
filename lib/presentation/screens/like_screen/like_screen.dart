@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/components/product_card.dart';
@@ -15,7 +16,8 @@ class LikeScreen extends StatefulWidget {
 }
 
 class _LikeScreenState extends State<LikeScreen> {
-  final LikePresenter _presenter = LikePresenter(LikeViewModel(ScreenState.none));
+  final LikePresenter _presenter =
+      LikePresenter(LikeViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -32,7 +34,7 @@ class _LikeScreenState extends State<LikeScreen> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: const Text(
-          "Liked by you",
+          "Cart",
           style: TextStyle(
             color: AppColors.primaryColor,
             fontSize: 20,
@@ -43,28 +45,57 @@ class _LikeScreenState extends State<LikeScreen> {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.zero,
-              itemCount: _presenter.products.length,
-              itemBuilder: (context, index) {
-                return ProductCard(
-                  image: _presenter.products[index].image,
-                  title: _presenter.products[index].title,
-                  price: _presenter.products[index].price,
-                  description: _presenter.products[index].description,
-                  showDesc: false,
-                  quantity: 1,
-                );
-              },
-            ),
+            child: StreamBuilder(
+                stream: FirebaseFirestore.instance.collection('cart').snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  return ListView(
+                    children: snapshot.data!.docs.map((document) {
+                      return Column(
+                        children: [
+                          ProductCard(
+                            image: document['photo'],
+                            title: document['name'],
+                            price: document['price'],
+                            description: document['description'],
+                            showDesc: false,
+                            quantity: 1,
+                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(
+                          //       horizontal: 24, vertical: 26),
+                          //   child: Row(
+                          //     children: [
+                          //       Expanded(
+                          //         child: CustomButton(
+                          //           onClicked: () {},
+                          //           text: "Buy",
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // )
+                        ],
+                      );
+                    }).toList(),
+                  );
+                }),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 26),
             child: Row(
               children: [
                 Expanded(
-                  child: CustomButton(onClicked: () {},text: "Buy",),
+                  child: CustomButton(
+                    onClicked: () {},
+                    text: "Buy",
+                  ),
                 ),
               ],
             ),

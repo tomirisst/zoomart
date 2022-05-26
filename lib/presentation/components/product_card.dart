@@ -39,7 +39,7 @@ class ProductCardState extends State<ProductCard> {
 
   void decrement() {
     setState(() {
-      quantity--;
+      quantity = quantity == 0 ? quantity : quantity-1;
     });
   }
   @override
@@ -61,10 +61,15 @@ class ProductCardState extends State<ProductCard> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 100,
-            width: 100,
-            child: Image.network(image),
+          Align(
+            alignment: Alignment.topLeft,
+            child: SizedBox(
+              height: 140,
+              width: 110,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Image.network(image, fit: BoxFit.fitHeight,)),
+            ),
           ),
           const SizedBox(
             width: 15,
@@ -100,7 +105,8 @@ class ProductCardState extends State<ProductCard> {
                     Flexible(
                       child: Text(
                         description,
-                        overflow: TextOverflow.fade,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -114,14 +120,14 @@ class ProductCardState extends State<ProductCard> {
                   child: Center(
                     child: Row(
                       children: [
-                        ChangeAmountButton(onClicked: increment, text: "+"),
+                        ChangeAmountButton(onClicked: decrement, text: "-"),
                         Text(quantity.toString(),
                           style: const TextStyle(
                             fontSize: 20,
                             color: AppColors.black,
                             fontWeight: FontWeight.bold,
                           ),),
-                        ChangeAmountButton(onClicked: decrement, text: "-"),
+                        ChangeAmountButton(onClicked: increment, text: "+"),
                       ],
                     ),
                   ),
