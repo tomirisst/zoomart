@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/components/custom_button.dart';
+import 'package:zoomart/presentation/screens/auth_screen/auth_screen.dart';
 import 'package:zoomart/presentation/screens/login_screen/login_screen.dart';
 import 'package:zoomart/presentation/screens/onboarding_screen/widgets/page.dart';
 
@@ -71,7 +72,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: CustomButton(
                       onClicked: () {
                         Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                            context, MaterialPageRoute(builder: (context) => const AuthScreen()));
                       },
                       text: "Let's Go",
                     ),

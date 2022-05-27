@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:zoomart/presentation/screens/onboarding_screen/onboarding_screen.dart';
+import 'package:zoomart/presentation/screens/signup_screen/utils.dart';
 import 'package:zoomart/presentation/services/api_manager.dart';
 
 import 'firebase_options.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: Utils.messengerKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Lato',

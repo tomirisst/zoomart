@@ -49,6 +49,7 @@ dependencies:
   rxdart: ^0.27.3
   flutter_svg: ^1.0.3
   flutter_neumorphic: ^3.2.0
+  email_validator: ^2.0.1
 
 dev_dependencies:
   flutter_test:

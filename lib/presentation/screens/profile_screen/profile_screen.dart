@@ -6,6 +6,7 @@ import 'package:zoomart/presentation/screens/profile_screen/profile_view_model.d
 import 'package:zoomart/presentation/screens/profile_screen/widgets/profile_card.dart';
 
 import '../../base/base_screen_state.dart';
+import '../auth_screen/auth_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -15,7 +16,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final ProfilePresenter _presenter = ProfilePresenter(ProfileViewModel(ScreenState.none));
+  final ProfilePresenter _presenter =
+      ProfilePresenter(ProfileViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -35,8 +37,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 alignment: Alignment.topCenter,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                    margin: const EdgeInsets.only(left: 24, right: 24, top: 70, bottom: 12),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 16),
+                    margin: const EdgeInsets.only(
+                        left: 24, right: 24, top: 70, bottom: 12),
                     decoration: BoxDecoration(
                       color: AppColors.white,
                       borderRadius: BorderRadius.circular(25),
@@ -83,9 +87,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       borderRadius: BorderRadius.circular(50),
                       color: AppColors.primaryColor,
                     ),
-                    child : ClipRRect(
+                    child: ClipRRect(
                       borderRadius: BorderRadius.circular(50),
-                      child: Image.network("https://m.media-amazon.com/images/I/41AKvnBNqoL.jpg"),
+                      child: Image.network(
+                          "https://m.media-amazon.com/images/I/41AKvnBNqoL.jpg"),
                     ),
                   )
                 ],
@@ -94,7 +99,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ProfileCard(onTap: () {}, text: "Payment Details"),
               ProfileCard(onTap: () {}, text: "Orders"),
               ProfileCard(onTap: () {}, text: "Politics & Docs"),
-              ProfileCard(onTap: () => FirebaseAuth.instance.signOut(), text: "Log Out"),
+              ProfileCard(
+                  onTap: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => const AuthScreen()));
+                    FirebaseAuth.instance.signOut();},
+                  text: "Log Out"),
             ],
           ),
         ),

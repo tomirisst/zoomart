@@ -18,7 +18,6 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  final PaymentPresenter _presenter = PaymentPresenter(PaymentViewModel(ScreenState.none));
 
   Widget buildTextField({required double leftPadding, required double rightPadding, required String hintText}){
     return Container(
