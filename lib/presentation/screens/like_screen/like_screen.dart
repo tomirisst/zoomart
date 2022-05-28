@@ -22,8 +22,9 @@ class _LikeScreenState extends State<LikeScreen> {
   final LikePresenter _presenter =
       LikePresenter(LikeViewModel(ScreenState.none));
   List<Goods> goods = [];
-  var docSnapshot = FirebaseFirestore.instance.collection('usersCart').doc(FirebaseAuth.instance.currentUser?.uid).get();
-  var document3 = FirebaseFirestore.instance.collection('usersCart').doc(FirebaseAuth.instance.currentUser?.uid);
+  var document3 = FirebaseFirestore.instance
+      .collection('usersCart')
+      .doc(FirebaseAuth.instance.currentUser?.uid);
 
   Future<void> getGoods() async {
     goods = await _presenter.products;
@@ -66,8 +67,12 @@ class _LikeScreenState extends State<LikeScreen> {
         children: [
           Expanded(
             child: StreamBuilder(
-                stream: FirebaseFirestore.instance.collection('usersCart').doc(FirebaseAuth.instance.currentUser?.uid).snapshots(),
-                builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                stream: FirebaseFirestore.instance
+                    .collection('usersCart')
+                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                    .snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<DocumentSnapshot> snapshot) {
                   if (!snapshot.hasData) {
                     return Center(
                       child: CircularProgressIndicator(),
@@ -75,25 +80,30 @@ class _LikeScreenState extends State<LikeScreen> {
                   }
                   var userDocument = snapshot.data!.data();
                   var id = userDocument!["id"];
-                  print("The id is:");
-                  print(userDocument["id"]);
-                  var good = goods[id - 1];
-                      return Column(
-                        children: [
-                          ProductCard(
-                            // image: document['photo'],
-                            // title: document['name'],
-                            // price: document['price'],
-                            // description: document['description'],
-                            image: good.photo!,
-                            title: good.name!,
-                            price: good.price!,
-                            description: good.description!,
-                            showDesc: false,
-                            quantity: 1,
-                          ),
-                        ],
-                      );
+                  List<int> idsInCart = List.from(userDocument['ids']);
+                  print(List.from(userDocument['ids']));
+
+                  return SingleChildScrollView(
+                    child: Column(
+                        children: List.generate(
+                      idsInCart.length,
+                      (index) {
+                        var good = goods[idsInCart[index] - 1];
+                        return ProductCard(
+                          // image: document['photo'],
+                          // title: document['name'],
+                          // price: document['price'],
+                          // description: document['description'],
+                          image: good.photo!,
+                          title: good.name!,
+                          price: good.price!,
+                          description: good.description!,
+                          showDesc: false,
+                          quantity: 1,
+                        );
+                      },
+                    )),
+                  );
                 }),
           ),
           Padding(
@@ -106,7 +116,8 @@ class _LikeScreenState extends State<LikeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DeliveryScreen(),),
+                          builder: (context) => DeliveryScreen(),
+                        ),
                       );
                     },
                     text: "Buy",

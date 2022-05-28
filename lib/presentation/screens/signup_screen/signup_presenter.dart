@@ -23,7 +23,8 @@ class SignUpPresenter extends BasePresenter<SignUpViewModel> {
       CollectionReference usersCart = FirebaseFirestore.instance.collection('usersCart');
       var documnetId = FirebaseAuth.instance.currentUser?.uid;
       await usersCart.doc(documnetId).set({
-        'id': 9,
+        'id': 8,
+        'ids': [],
         'uid': documnetId,
       });
       // usersCart.add({
