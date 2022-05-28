@@ -81,7 +81,7 @@ class _LikeScreenState extends State<LikeScreen> {
                   var userDocument = snapshot.data!.data();
                   var id = userDocument!["id"];
                   List<int> idsInCart = List.from(userDocument['ids']);
-                  print(List.from(userDocument['ids']));
+                  // print(List.from(userDocument['ids']));
 
                   return SingleChildScrollView(
                     child: Column(

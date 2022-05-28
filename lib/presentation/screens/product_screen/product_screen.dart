@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/components/custom_button.dart';
 import 'package:zoomart/presentation/screens/like_screen/like_presenter.dart';
+import 'package:zoomart/presentation/screens/product_screen/product_presenter.dart';
+import 'package:zoomart/presentation/screens/product_screen/product_view_model.dart';
 import 'package:zoomart/presentation/services/cart_manager.dart';
 
+import '../../base/base_screen_state.dart';
 import '../../models/goods_model.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -17,6 +20,8 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  final ProductPresenter _presenter =
+  ProductPresenter(ProductViewModel(ScreenState.none));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,6 +142,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                     CustomButton(
                         onClicked: () {
+                          _presenter.isProductInCart(widget.good);
                           if (!widget.good.isInCart!) {
                             widget.good.isInCart = !widget.good.isInCart!;
                             const snackBar =
