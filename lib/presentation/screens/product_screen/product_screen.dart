@@ -49,20 +49,33 @@ class _ProductScreenState extends State<ProductScreen> {
                   const SizedBox(
                     height: 50,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        height: 150,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: Image.network(widget.good.photo!, fit: BoxFit.fitHeight,),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                              height: 200,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(25),
+                                child: Image.network(
+                                  widget.good.photo!,
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                          ],
                         ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -122,19 +135,23 @@ class _ProductScreenState extends State<ProductScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    CustomButton(onClicked: () {
-                      if(!widget.good.isInCart!) {
-                        widget.good.isInCart = !widget.good.isInCart!;
-                        const snackBar = SnackBar(
-                            content: Text('Added to Cart'));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        addProductToCart(widget.good);
-                      } else {
-                        const snackBar = SnackBar(
-                            content: Text('Already in Cart'));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    }, text: "Add to cart"),
+                    CustomButton(
+                        onClicked: () {
+                          if (!widget.good.isInCart!) {
+                            widget.good.isInCart = !widget.good.isInCart!;
+                            const snackBar =
+                                SnackBar(content: Text('Added to Cart'));
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                            addProductToCart(widget.good);
+                          } else {
+                            const snackBar =
+                                SnackBar(content: Text('Already in Cart'));
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
+                        },
+                        text: "Add to cart"),
                   ],
                 ),
               ),

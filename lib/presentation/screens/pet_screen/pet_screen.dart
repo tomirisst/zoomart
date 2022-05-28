@@ -259,14 +259,21 @@ class _PetScreenState extends State<PetScreen> {
                               showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                    title: Text("Pop up"),
-                                    content: Text("Call me on my cellphone"),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(25))),
+                                    title: Text("Adopt this cutie by one phone call!",),
+                                    content: Text("But first contact the owner and get additiional info"),
                                     actions: [
-                                      TextButton(
-                                          onPressed: () async{
+                                      CustomButton(
+                                          onClicked: () async {
                                             await FlutterPhoneDirectCaller.callNumber(widget.pet.ownerNumber!);
                                           },
-                                          child: Text("Call")),
+                                          text: "Call"),
+                                      // TextButton(
+                                      //     onPressed: () {
+                                      //       Navigator.of(context).pop();
+                                      //     },
+                                      //     child: Text("Cancel"),
+                                      // ),
                                     ],
                                   ));
 

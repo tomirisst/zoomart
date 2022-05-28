@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/components/product_card.dart';
@@ -7,6 +8,7 @@ import 'package:zoomart/presentation/screens/like_screen/like_view_model.dart';
 
 import '../../base/base_screen_state.dart';
 import '../../components/custom_button.dart';
+import '../../models/goods_model.dart';
 import '../delivery_screen/delivery_screen.dart';
 
 class LikeScreen extends StatefulWidget {
@@ -19,6 +21,23 @@ class LikeScreen extends StatefulWidget {
 class _LikeScreenState extends State<LikeScreen> {
   final LikePresenter _presenter =
       LikePresenter(LikeViewModel(ScreenState.none));
+  List<Goods> goods = [];
+  var docSnapshot = FirebaseFirestore.instance.collection('usersCart').doc(FirebaseAuth.instance.currentUser?.uid).get();
+  var document3 = FirebaseFirestore.instance.collection('usersCart').doc(FirebaseAuth.instance.currentUser?.uid);
+
+  Future<void> getGoods() async {
+    goods = await _presenter.products;
+    setState(() {});
+    return;
+  }
+
+  @override
+  void initState() {
+    setState(() {
+      getGoods();
+    });
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {
@@ -47,31 +66,34 @@ class _LikeScreenState extends State<LikeScreen> {
         children: [
           Expanded(
             child: StreamBuilder(
-                stream: FirebaseFirestore.instance.collection('cart').snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                stream: FirebaseFirestore.instance.collection('usersCart').doc(FirebaseAuth.instance.currentUser?.uid).snapshots(),
+                builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
                   if (!snapshot.hasData) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
                   }
-
-                  return ListView(
-                    children: snapshot.data!.docs.map((document) {
+                  var userDocument = snapshot.data!.data();
+                  var id = userDocument!["id"];
+                  print("The id is:");
+                  print(userDocument["id"]);
+                  var good = goods[id - 1];
                       return Column(
                         children: [
                           ProductCard(
-                            image: document['photo'],
-                            title: document['name'],
-                            price: document['price'],
-                            description: document['description'],
+                            // image: document['photo'],
+                            // title: document['name'],
+                            // price: document['price'],
+                            // description: document['description'],
+                            image: good.photo!,
+                            title: good.name!,
+                            price: good.price!,
+                            description: good.description!,
                             showDesc: false,
                             quantity: 1,
                           ),
                         ],
                       );
-                    }).toList(),
-                  );
                 }),
           ),
           Padding(

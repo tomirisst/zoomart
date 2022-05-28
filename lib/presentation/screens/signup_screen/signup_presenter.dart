@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:zoomart/presentation/base/base_presenter.dart';
@@ -19,6 +20,16 @@ class SignUpPresenter extends BasePresenter<SignUpViewModel> {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
+      CollectionReference usersCart = FirebaseFirestore.instance.collection('usersCart');
+      var documnetId = FirebaseAuth.instance.currentUser?.uid;
+      await usersCart.doc(documnetId).set({
+        'id': 9,
+        'uid': documnetId,
+      });
+      // usersCart.add({
+      //   'id': 2,
+      //   'uid': FirebaseAuth.instance.currentUser?.uid,
+      // }).then((value) => print('Document added'));
     } on FirebaseAuthException catch (e) {
       print(e);
 
