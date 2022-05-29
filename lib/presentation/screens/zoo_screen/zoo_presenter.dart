@@ -1,7 +1,6 @@
 import 'package:zoomart/presentation/base/base_presenter.dart';
 import 'package:zoomart/presentation/screens/zoo_screen/zoo_view_model.dart';
 
-import '../../models/pets_model.dart';
 import '../../services/api_manager.dart';
 
 class ZooPresenter extends BasePresenter<ZooViewModel> {
