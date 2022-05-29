@@ -621,7 +621,7 @@ PODS:
     - Firebase/Auth (= 8.15.0)
     - firebase_core
     - Flutter
-  - firebase_core (1.17.0):
+  - firebase_core (1.17.1):
     - Firebase/CoreOnly (= 8.15.0)
     - Flutter
   - firebase_messaging (9.1.4):
@@ -760,6 +760,8 @@ PODS:
   - PromisesObjC (2.1.0)
   - url_launcher_ios (0.0.1):
     - Flutter
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -769,6 +771,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_phone_direct_caller (from `.symlinks/plugins/flutter_phone_direct_caller/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
   trunk:
@@ -806,6 +809,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_phone_direct_caller/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
@@ -813,7 +818,7 @@ SPEC CHECKSUMS:
   cloud_firestore: ed77c00a757d544ddacefe45098896fc9dab0e35
   Firebase: 5f8193dff4b5b7c5d5ef72ae54bb76c08e2b841d
   firebase_auth: 09005c587c0b450a3adcaad285129f1e32713142
-  firebase_core: aa1b92020533f5c23955e388c347c58fd64f8627
+  firebase_core: 318de541b0e61d3f24262982a3f0b54afe72439b
   firebase_messaging: 8890de2f8b9fc742002ffc0907e52ae97f5333f6
   FirebaseAuth: 3e73bf8abf4fbb40f8b421f361f4cc48ee57388c
   FirebaseCore: 5743c5785c074a794d35f2fff7ecc254a91e08b1
@@ -833,6 +838,7 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
   url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
+  webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 
 PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
 

@@ -10,16 +10,3 @@ class LikePresenter extends BasePresenter<LikeViewModel> {
 
   Future<List<Goods>> products = fetchGoods();
 }
-
-// ProductCard getProductCard(List<int> idsInCart, List<Goods> goods) {
-//   for(var i = 0; i < idsInCart.length; i++) {
-//     return ProductCard(
-//       image: goods[idsInCart[i]].photo!,
-//       title: goods[idsInCart[i]].name!,
-//       price: goods[idsInCart[i]].price!,
-//       description: goods[idsInCart[i]].description!,
-//       showDesc: false,
-//       quantity: 1,
-//     );
-//   }
-// }

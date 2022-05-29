@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/components/product_card.dart';
 import 'package:zoomart/presentation/screens/like_screen/like_presenter.dart';
@@ -20,10 +21,13 @@ class LikeScreen extends StatefulWidget {
 
 class _LikeScreenState extends State<LikeScreen> {
   double finalPrice = 0;
+  var count = 1;
+
   void changePrice(bool isPlus, double price) {
     isPlus ? finalPrice += price : finalPrice -= price;
-    print(finalPrice);
+    print(price);
   }
+
   final LikePresenter _presenter =
       LikePresenter(LikeViewModel(ScreenState.none));
   List<Goods> goods = [];
@@ -84,8 +88,8 @@ class _LikeScreenState extends State<LikeScreen> {
                     );
                   }
                   var userDocument = snapshot.data!.data();
-                  var id = userDocument!["id"];
-                  List<int> idsInCart = List.from(userDocument['ids']);
+                  List<int> idsInCart = List.from(userDocument!['ids']);
+                  print("here");
                   // print(List.from(userDocument['ids']));
 
                   return SingleChildScrollView(
@@ -94,6 +98,13 @@ class _LikeScreenState extends State<LikeScreen> {
                       idsInCart.length,
                       (index) {
                         var good = goods[idsInCart[index] - 1];
+                        if (count > 0) {
+                          for (var id in idsInCart) {
+                            changePrice(
+                                true, double.parse(goods[id - 1].price!));
+                          }
+                          count--;
+                        }
                         return ProductCard(
                           // image: document['photo'],
                           // title: document['name'],
@@ -122,7 +133,9 @@ class _LikeScreenState extends State<LikeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DeliveryScreen(total: finalPrice,),
+                          builder: (context) => DeliveryScreen(
+                              total:
+                                  double.parse(finalPrice.toStringAsFixed(2))),
                         ),
                       );
                     },
