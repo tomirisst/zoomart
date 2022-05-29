@@ -11,6 +11,7 @@ class ProductCard extends StatefulWidget {
   final String description;
   final bool showDesc;
   final int quantity;
+  final void Function(bool, double) callback;
 
 
   ProductCard({
@@ -19,9 +20,10 @@ class ProductCard extends StatefulWidget {
     required this.price,
     required this.description,
     required this.showDesc,
-    required this.quantity});
+    required this.quantity,
+    required this.callback});
   @override
-  ProductCardState createState() => ProductCardState(image, title, price, description,showDesc, quantity);
+  ProductCardState createState() => ProductCardState(image, title, price, description,showDesc, quantity, callback);
 }
 class ProductCardState extends State<ProductCard> {
   String image;
@@ -30,15 +32,18 @@ class ProductCardState extends State<ProductCard> {
   String description;
   bool showDesc;
   int quantity;
-  ProductCardState(this.image, this.title, this.price, this.description, this.showDesc,this.quantity);
+  void Function(bool, double) callback;
+  ProductCardState(this.image, this.title, this.price, this.description, this.showDesc,this.quantity,  this.callback);
   void increment() {
     setState(() {
       quantity++;
+      callback(true, double.parse(price));
     });
   }
 
   void decrement() {
     setState(() {
+      quantity != 0 ? callback(false, double.parse(price)): false;
       quantity = quantity == 0 ? quantity : quantity-1;
     });
   }

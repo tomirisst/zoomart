@@ -19,6 +19,11 @@ class LikeScreen extends StatefulWidget {
 }
 
 class _LikeScreenState extends State<LikeScreen> {
+  double finalPrice = 0;
+  void changePrice(bool isPlus, double price) {
+    isPlus ? finalPrice += price : finalPrice -= price;
+    print(finalPrice);
+  }
   final LikePresenter _presenter =
       LikePresenter(LikeViewModel(ScreenState.none));
   List<Goods> goods = [];
@@ -100,6 +105,7 @@ class _LikeScreenState extends State<LikeScreen> {
                           description: good.description!,
                           showDesc: false,
                           quantity: 1,
+                          callback: changePrice,
                         );
                       },
                     )),
@@ -116,7 +122,7 @@ class _LikeScreenState extends State<LikeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DeliveryScreen(),
+                          builder: (context) => DeliveryScreen(total: finalPrice,),
                         ),
                       );
                     },

@@ -1,12 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:zoomart/constants/app_colors.dart';
+import 'package:zoomart/presentation/screens/payment_screen/payment_screen.dart';
 import 'package:zoomart/presentation/screens/profile_screen/profile_presenter.dart';
 import 'package:zoomart/presentation/screens/profile_screen/profile_view_model.dart';
 import 'package:zoomart/presentation/screens/profile_screen/widgets/profile_card.dart';
 
 import '../../base/base_screen_state.dart';
 import '../auth_screen/auth_screen.dart';
+import '../edit_screen/edit_screen.dart';
+import '../orders_screen/orders_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -95,9 +98,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   )
                 ],
               ),
-              ProfileCard(onTap: () {}, text: "Edit Profile"),
-              ProfileCard(onTap: () {}, text: "Payment Details"),
-              ProfileCard(onTap: () {}, text: "Orders"),
+              ProfileCard(onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => EditScreen()));
+              }, text: "Edit Profile"),
+              ProfileCard(onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => PaymentScreen()));
+              }, text: "Payment Details"),
+              ProfileCard(onTap: () {
+                  Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => OrderScreen()));
+              }, text: "Orders"),
               ProfileCard(onTap: () {}, text: "Politics & Docs"),
               ProfileCard(
                   onTap: () {

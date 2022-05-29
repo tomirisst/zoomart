@@ -50,6 +50,7 @@ dependencies:
   flutter_svg: ^1.0.3
   flutter_neumorphic: ^3.2.0
   email_validator: ^2.0.1
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:
