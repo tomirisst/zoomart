@@ -162,6 +162,7 @@ class _BoneScreenState extends State<BoneScreen> {
                       description: good.description!,
                       showDesc: true,
                       quantity: 1,
+                      callback: (bool , double ) {  },
                     ),
                   );
                 },

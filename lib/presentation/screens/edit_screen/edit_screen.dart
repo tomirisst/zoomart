@@ -5,19 +5,18 @@ import 'package:zoomart/presentation/components/custom_button.dart';
 import 'package:zoomart/presentation/screens/payment_screen/payment_screen.dart';
 
 import '../../base/base_screen_state.dart';
-import 'delivery_presenter.dart';
-import 'delivery_view_model.dart';
+import 'edit_presenter.dart';
+import 'edit_view_model.dart';
 
-class DeliveryScreen extends StatefulWidget {
-  final double total;
-  const DeliveryScreen({Key? key, required this.total}) : super(key: key);
+class EditScreen extends StatefulWidget {
+  const EditScreen({Key? key}) : super(key: key);
 
   @override
-  _DeliveryScreenState createState() => _DeliveryScreenState();
+  _EditScreenState createState() => _EditScreenState();
 }
 
-class _DeliveryScreenState extends State<DeliveryScreen> {
-  final DeliveryPresenter _presenter = DeliveryPresenter(DeliveryViewModel(ScreenState.none));
+class _EditScreenState extends State<EditScreen> {
+  final EditPresenter _presenter = EditPresenter(EditViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -80,7 +79,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                       Row(
                         children: const [
                           Text(
-                            "Delivery",
+                            "Edit",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -111,9 +110,42 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         ],
                       ),
                       TextField(
+                        controller: _presenter.nameController,
+                        cursorColor: AppColors.primaryColor,
+                        decoration: const InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.primaryColor),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.primaryColor),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: const [
+                          Icon(
+                            Icons.mail_outline_rounded,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            "Email",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                      TextField(
                         controller: _presenter.emailController,
                         cursorColor: AppColors.primaryColor,
-                        obscureText: true,
                         decoration: const InputDecoration(
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: AppColors.primaryColor),
@@ -129,14 +161,14 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                       Row(
                         children: const [
                           Icon(
-                            Icons.phone,
+                            Icons.key,
                             color: Colors.grey,
                           ),
                           SizedBox(
                             width: 8,
                           ),
                           Text(
-                            "Phone",
+                            "Password",
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
@@ -146,9 +178,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         ],
                       ),
                       TextField(
-                        controller: _presenter.phoneController,
+                        controller: _presenter.passwordController,
                         cursorColor: AppColors.primaryColor,
-                        obscureText: true,
                         decoration: const InputDecoration(
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: AppColors.primaryColor),
@@ -158,72 +189,15 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                           ),
                         ),
                       ),
+
                       const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: const [
-                          Icon(
-                            Icons.house,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            "Address",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      TextField(
-                        controller: _presenter.addressController,
-                        cursorColor: AppColors.primaryColor,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.primaryColor),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.primaryColor),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.account_balance_wallet_outlined,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            "Total: " + widget.total.toString(),
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 100,
+                        height: 120,
                       ),
                       CustomButton(
                         onClicked: () {
-                          Navigator.push(
-                              context, MaterialPageRoute(builder: (context) => PaymentScreen()));
+                          Navigator.pop(context);
                         },
-                        text: "Pay",
+                        text: "Save",
                       ),
                       const SizedBox(
                         height: 25,
