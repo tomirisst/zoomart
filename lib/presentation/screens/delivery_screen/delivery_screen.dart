@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/components/custom_button.dart';
 import 'package:zoomart/presentation/screens/payment_screen/payment_screen.dart';
+import 'package:zoomart/presentation/services/cart_manager.dart';
 
 import '../../base/base_screen_state.dart';
 import 'delivery_presenter.dart';
@@ -216,10 +217,12 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         ],
                       ),
                       const SizedBox(
-                        height: 100,
+                        height: 70,
                       ),
                       CustomButton(
                         onClicked: () {
+                          addOrderToOrders(_presenter.addressController.text.trim(), _presenter.phoneController.text.trim(), "Delivery in 2 days", widget.total);
+                          clearCartData();
                           Navigator.push(
                               context, MaterialPageRoute(builder: (context) => PaymentScreen()));
                         },

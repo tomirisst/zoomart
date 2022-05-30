@@ -8,7 +8,7 @@ class OrderViewModel extends BaseViewModel{
 }
 class Order {
   final int orderNumber;
-  final int total;
+  final double total;
   final String status;
 
   Order({

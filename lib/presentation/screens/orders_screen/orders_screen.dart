@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:zoomart/presentation/screens/orders_screen/widget/order_card.dart';
 
@@ -43,17 +45,31 @@ class _OrderScreenState extends State<OrderScreen> {
           children: [
              Expanded(
               flex: 8,
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                padding: EdgeInsets.zero,
-                itemCount: _presenter.orders.length,
-                itemBuilder: (context, index) {
-                  return  OrderCard(
-                    orderNumber: _presenter.orders[index].orderNumber,
-                    total: _presenter.orders[index].total,
-                    status: _presenter.orders[index].status,
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('usersCart')
+                    .doc(FirebaseAuth.instance.currentUser?.uid).snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  List<dynamic>? orders = snapshot.data!.data()?["orders"];
+                  return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    itemCount: orders?.length,
+                    itemBuilder: (context, index) {
+                      return  OrderCard(
+                        orderNumber: orders?[index]["key"],
+                        total: orders?[index]["totalPrice"],
+                        status: orders?[index]["status"],
+                      );
+                    },
                   );
-                },
+                }
               ),
             ),
       ]),

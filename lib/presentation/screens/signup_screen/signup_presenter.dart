@@ -25,6 +25,7 @@ class SignUpPresenter extends BasePresenter<SignUpViewModel> {
       await usersCart.doc(documnetId).set({
         'ids': [],
         'uid': documnetId,
+        'orders' : [{}],
       });
       // usersCart.add({
       //   'id': 2,

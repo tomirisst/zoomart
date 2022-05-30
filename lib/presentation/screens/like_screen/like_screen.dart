@@ -11,6 +11,7 @@ import '../../base/base_screen_state.dart';
 import '../../components/custom_button.dart';
 import '../bone_screen/bone_view_model.dart';
 import '../delivery_screen/delivery_screen.dart';
+import '../orders_screen/orders_presenter.dart';
 
 class LikeScreen extends StatefulWidget {
   const LikeScreen({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _LikeScreenState extends State<LikeScreen> {
   double finalPrice = 0;
   var count = 1;
 
-  void changePrice(bool isPlus, double price) {
+  Future<void> changePrice(bool isPlus, double price) async {
     isPlus ? finalPrice += price : finalPrice -= price;
     print(price);
   }
@@ -31,9 +32,6 @@ class _LikeScreenState extends State<LikeScreen> {
   final LikePresenter _presenter =
       LikePresenter(LikeViewModel(ScreenState.none));
   List<Goods> goods = [];
-  Stream document3 = FirebaseFirestore.instance
-      .collection('usersCart')
-      .doc(FirebaseAuth.instance.currentUser?.uid).snapshots();
 
   Future<void> getGoods() async {
     goods = await _presenter.products;

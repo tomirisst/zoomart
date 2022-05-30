@@ -21,11 +21,21 @@ void addProductToCart(Goods product) {
       .update({
     'ids': FieldValue.arrayUnion([product.id])
   });
-  // FirebaseFirestore.instance.collection('cart').add({
-  //   'id': product.id,
-  //   'name': product.name,
-  //   'description': product.description,
-  //   'price': product.price,
-  //   'photo': product.photo,
-  // });
+}
+
+void addOrderToOrders(String address, String phoneNumber, String status,
+    double totalPrice) {
+  FirebaseFirestore.instance
+      .collection('usersCart')
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .update({
+    'orders': [{
+      "address": address,
+      "key": 12346,
+      "phoneNumber": phoneNumber,
+      "status": status,
+      "totalPrice": totalPrice
+    }]
+  });
+
 }

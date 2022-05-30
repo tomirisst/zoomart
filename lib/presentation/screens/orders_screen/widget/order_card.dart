@@ -4,7 +4,7 @@ import '../../../../constants/app_colors.dart';
 
 class OrderCard extends StatelessWidget {
   final int orderNumber;
-  final int total;
+  final double total;
   final String status;
 
   const OrderCard({
