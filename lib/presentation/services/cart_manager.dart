@@ -7,6 +7,7 @@ import 'package:uuid/uuid.dart';
 import 'package:zoomart/presentation/components/product_card.dart';
 
 import '../models/goods_model.dart';
+import '../screens/bone_screen/bone_view_model.dart';
 
 class CartManager extends GetxController {
   static CartManager instance = Get.find();

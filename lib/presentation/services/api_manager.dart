@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:zoomart/presentation/models/goods_model.dart';
-import 'package:zoomart/presentation/models/pets_model.dart';
 
 import '../../constants/strings.dart';
+import '../screens/bone_screen/bone_view_model.dart';
+import '../screens/zoo_screen/zoo_view_model.dart';
 
 Future<List<Goods>> fetchGoods() async {
   final response = await http.get(Uri.parse(Strings.apiUrl));

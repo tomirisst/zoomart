@@ -9,7 +9,7 @@ import 'package:zoomart/presentation/screens/like_screen/like_view_model.dart';
 
 import '../../base/base_screen_state.dart';
 import '../../components/custom_button.dart';
-import '../../models/goods_model.dart';
+import '../bone_screen/bone_view_model.dart';
 import '../delivery_screen/delivery_screen.dart';
 
 class LikeScreen extends StatefulWidget {

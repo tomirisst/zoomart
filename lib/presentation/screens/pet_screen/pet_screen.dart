@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/components/custom_button.dart';
-import 'package:zoomart/presentation/screens/pet_screen/pet_presenter.dart';
-import 'package:zoomart/presentation/screens/pet_screen/pet_view_model.dart';
-import 'package:zoomart/presentation/screens/zoo_screen/zoo_presenter.dart';
-import 'package:zoomart/presentation/services/api_manager.dart';
 
 import '../../models/pets_model.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
+
+import '../zoo_screen/zoo_view_model.dart';
 
 class PetScreen extends StatefulWidget {
   final Pets pet;

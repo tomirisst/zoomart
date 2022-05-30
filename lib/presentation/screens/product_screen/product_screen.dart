@@ -2,13 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/components/custom_button.dart';
-import 'package:zoomart/presentation/screens/like_screen/like_presenter.dart';
 import 'package:zoomart/presentation/screens/product_screen/product_presenter.dart';
 import 'package:zoomart/presentation/screens/product_screen/product_view_model.dart';
 import 'package:zoomart/presentation/services/cart_manager.dart';
 
 import '../../base/base_screen_state.dart';
-import '../../models/goods_model.dart';
+import '../bone_screen/bone_view_model.dart';
 
 class ProductScreen extends StatefulWidget {
   final Goods good;
