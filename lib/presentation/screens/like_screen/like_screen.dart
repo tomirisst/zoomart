@@ -31,9 +31,9 @@ class _LikeScreenState extends State<LikeScreen> {
   final LikePresenter _presenter =
       LikePresenter(LikeViewModel(ScreenState.none));
   List<Goods> goods = [];
-  var document3 = FirebaseFirestore.instance
+  Stream document3 = FirebaseFirestore.instance
       .collection('usersCart')
-      .doc(FirebaseAuth.instance.currentUser?.uid);
+      .doc(FirebaseAuth.instance.currentUser?.uid).snapshots();
 
   Future<void> getGoods() async {
     goods = await _presenter.products;
@@ -106,10 +106,6 @@ class _LikeScreenState extends State<LikeScreen> {
                           count--;
                         }
                         return ProductCard(
-                          // image: document['photo'],
-                          // title: document['name'],
-                          // price: document['price'],
-                          // description: document['description'],
                           image: good.photo!,
                           title: good.name!,
                           price: good.price!,

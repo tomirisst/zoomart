@@ -15,4 +15,5 @@ class ZooPresenter extends BasePresenter<ZooViewModel> {
     "Other",
   ];
   Future<List<Pets>> pets = fetchPets();
+
 }
