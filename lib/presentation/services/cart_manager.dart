@@ -25,16 +25,18 @@ void addProductToCart(Goods product) {
 
 void addOrderToOrders(String address, String phoneNumber, String status,
     double totalPrice) {
+  print("her");
+  print(totalPrice);
+  print(address);
   FirebaseFirestore.instance
       .collection('usersCart')
       .doc(FirebaseAuth.instance.currentUser?.uid)
       .update({
     'orders': [{
-      "address": address,
-      "key": 12346,
-      "phoneNumber": phoneNumber,
-      "status": status,
-      "totalPrice": totalPrice
+      'address': address,
+      'phoneNumber': phoneNumber,
+      'status': status,
+      'totalPrice': 12.32
     }]
   });
 

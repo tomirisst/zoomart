@@ -26,7 +26,6 @@ class _LikeScreenState extends State<LikeScreen> {
 
   Future<void> changePrice(bool isPlus, double price) async {
     isPlus ? finalPrice += price : finalPrice -= price;
-    print(price);
   }
 
   final LikePresenter _presenter =

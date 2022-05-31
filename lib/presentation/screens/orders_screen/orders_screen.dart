@@ -57,13 +57,16 @@ class _OrderScreenState extends State<OrderScreen> {
                     );
                   }
                   List<dynamic>? orders = snapshot.data!.data()?["orders"];
+                  print(orders);
                   return ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     padding: EdgeInsets.zero,
                     itemCount: orders?.length,
                     itemBuilder: (context, index) {
+                      print("Price in DB:");
+                      print(orders?[index]["status"]);
                       return  OrderCard(
-                        orderNumber: orders?[index]["key"],
+                        orderNumber: 1234,
                         total: orders?[index]["totalPrice"],
                         status: orders?[index]["status"],
                       );

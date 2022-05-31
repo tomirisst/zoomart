@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zoomart/constants/app_colors.dart';
 import 'package:zoomart/presentation/components/custom_button.dart';
 import 'package:zoomart/presentation/screens/payment_screen/payment_screen.dart';
+import 'package:zoomart/presentation/screens/wooppay_screen/wooppay_screen.dart';
 import 'package:zoomart/presentation/services/cart_manager.dart';
 
 import '../../base/base_screen_state.dart';
@@ -11,6 +12,7 @@ import 'delivery_view_model.dart';
 
 class DeliveryScreen extends StatefulWidget {
   final double total;
+
   const DeliveryScreen({Key? key, required this.total}) : super(key: key);
 
   @override
@@ -18,7 +20,8 @@ class DeliveryScreen extends StatefulWidget {
 }
 
 class _DeliveryScreenState extends State<DeliveryScreen> {
-  final DeliveryPresenter _presenter = DeliveryPresenter(DeliveryViewModel(ScreenState.none));
+  final DeliveryPresenter _presenter =
+      DeliveryPresenter(DeliveryViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -66,7 +69,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 24),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 48, vertical: 24),
                   decoration: const BoxDecoration(
                     color: AppColors.white,
                     borderRadius: BorderRadius.only(
@@ -114,13 +118,15 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                       TextField(
                         controller: _presenter.emailController,
                         cursorColor: AppColors.primaryColor,
-                        obscureText: true,
+                        obscureText: false,
                         decoration: const InputDecoration(
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.primaryColor),
+                            borderSide:
+                                BorderSide(color: AppColors.primaryColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.primaryColor),
+                            borderSide:
+                                BorderSide(color: AppColors.primaryColor),
                           ),
                         ),
                       ),
@@ -149,13 +155,15 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                       TextField(
                         controller: _presenter.phoneController,
                         cursorColor: AppColors.primaryColor,
-                        obscureText: true,
+                        obscureText: false,
                         decoration: const InputDecoration(
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.primaryColor),
+                            borderSide:
+                                BorderSide(color: AppColors.primaryColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.primaryColor),
+                            borderSide:
+                                BorderSide(color: AppColors.primaryColor),
                           ),
                         ),
                       ),
@@ -184,13 +192,15 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                       TextField(
                         controller: _presenter.addressController,
                         cursorColor: AppColors.primaryColor,
-                        obscureText: true,
+                        obscureText: false,
                         decoration: const InputDecoration(
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.primaryColor),
+                            borderSide:
+                                BorderSide(color: AppColors.primaryColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.primaryColor),
+                            borderSide:
+                                BorderSide(color: AppColors.primaryColor),
                           ),
                         ),
                       ),
@@ -221,10 +231,17 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                       ),
                       CustomButton(
                         onClicked: () {
-                          addOrderToOrders(_presenter.addressController.text.trim(), _presenter.phoneController.text.trim(), "Delivery in 2 days", widget.total);
+                          print(widget.total);
+                          addOrderToOrders(
+                              _presenter.addressController.text.trim(),
+                              _presenter.phoneController.text.trim(),
+                              "Delivery in 2 days",
+                              widget.total);
                           clearCartData();
                           Navigator.push(
-                              context, MaterialPageRoute(builder: (context) => PaymentScreen()));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WooppayScreen()));
                         },
                         text: "Pay",
                       ),
