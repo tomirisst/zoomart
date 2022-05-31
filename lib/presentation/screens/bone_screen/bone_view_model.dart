@@ -11,9 +11,11 @@ class Goods {
   final String? description;
   final String? price;
   final String? photo;
+  final int? categoryID;
   bool? isInCart;
 
   Goods({
+    required this.categoryID,
     required this.id,
     required this.name,
     required this.description,
@@ -30,6 +32,7 @@ class Goods {
         price: json['price'],
         //!.toDouble()
         photo: json['photo'],
+        categoryID: int.parse(json['category_id']),
         isInCart: false
     );
   }

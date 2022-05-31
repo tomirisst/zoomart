@@ -10,13 +10,24 @@ class BonePresenter extends BasePresenter<BoneViewModel> {
   BonePresenter(BoneViewModel model) : super(model);
 
   List<String> categories = [
-    "Sweets",
-    "Accessories",
-    "Clothes",
-    "Other",
-    "Other",
+    "All",
+    "Toys",
+    "Tools",
+    "Food",
+    "Feeding Tools",
     "Other",
   ];
-
   Future<List<Goods>> products = fetchGoods();
+  List<Goods> changeCategory(int catID, List<Goods> goods) {
+    List<Goods> catGoods = [];
+    if (catID != 0) {
+      for (var element in goods) {
+        if (element.categoryID == catID) {
+          catGoods.add(element);
+        }
+      }
+      return catGoods;
+    }
+    return goods;
+  }
 }

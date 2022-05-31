@@ -1,17 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:zoomart/constants/app_colors.dart';
-import 'package:zoomart/presentation/components/product_card.dart';
 import 'package:zoomart/presentation/screens/like_screen/like_presenter.dart';
 import 'package:zoomart/presentation/screens/like_screen/like_view_model.dart';
 
 import '../../base/base_screen_state.dart';
 import '../../components/custom_button.dart';
+import '../../components/order_card.dart';
 import '../bone_screen/bone_view_model.dart';
 import '../delivery_screen/delivery_screen.dart';
-import '../orders_screen/orders_presenter.dart';
 
 class LikeScreen extends StatefulWidget {
   const LikeScreen({Key? key}) : super(key: key);
@@ -86,8 +84,6 @@ class _LikeScreenState extends State<LikeScreen> {
                   }
                   var userDocument = snapshot.data!.data();
                   List<int> idsInCart = List.from(userDocument!['ids']);
-                  print("here");
-                  // print(List.from(userDocument['ids']));
 
                   return SingleChildScrollView(
                     child: Column(
@@ -102,12 +98,11 @@ class _LikeScreenState extends State<LikeScreen> {
                           }
                           count--;
                         }
-                        return ProductCard(
+                        return OrderCard(
                           image: good.photo!,
                           title: good.name!,
                           price: good.price!,
                           description: good.description!,
-                          showDesc: false,
                           quantity: 1,
                           callback: changePrice,
                         );

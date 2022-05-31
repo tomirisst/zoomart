@@ -20,14 +20,22 @@ class _ZooScreenState extends State<ZooScreen> {
   final ZooPresenter _presenter = ZooPresenter(ZooViewModel(ScreenState.none));
   //api
   List<Pets> pets = [];
+  List<Pets> catPets = [];
   bool isLoading = false;
 
   Future<void> getPets() async {
     setState(() => isLoading = true);
     pets = await _presenter.pets;
     await Future.delayed(const Duration(seconds: 1));
+    catPets = pets;
     setState(() => isLoading = false);
     return;
+  }
+
+  void changeCategory(String cat) {
+    setState(() {
+      catPets = _presenter.changeCategory(cat, pets);
+    });
   }
 
   @override
@@ -127,12 +135,21 @@ class _ZooScreenState extends State<ZooScreen> {
                       ],
                     ),
                     child: Center(
-                      child: Text(
-                        _presenter.categories[index],
-                        style: const TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
+                      child: ElevatedButton(
+                         onPressed: () {
+                          changeCategory(_presenter.categories[index]);
+                         },
+                        child: Text(
+                          _presenter.categories[index],
+                          style: const TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(AppColors.background),
+                          elevation: MaterialStateProperty.all(0.0),
                         ),
                       ),
                     ),
@@ -145,9 +162,9 @@ class _ZooScreenState extends State<ZooScreen> {
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 padding: EdgeInsets.zero,
-                itemCount: pets.length,
+                itemCount: catPets.length,
                 itemBuilder: (context, index) {
-                  var pet = pets[index];
+                  var pet = catPets[index];
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(

@@ -36,7 +36,7 @@ void addOrderToOrders(String address, String phoneNumber, String status,
       'address': address,
       'phoneNumber': phoneNumber,
       'status': status,
-      'totalPrice': 12.32
+      'totalPrice': totalPrice
     }]
   });
 

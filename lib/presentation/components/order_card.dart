@@ -3,20 +3,46 @@ import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
 import 'custom_button.dart';
 
-class ProductCard extends StatelessWidget {
+class OrderCard extends StatefulWidget {
   final String image;
   final String title;
   final String price;
   final String description;
+  final int quantity;
+  final void Function(bool, double) callback;
 
 
-  ProductCard({
+  OrderCard({
     required this.image,
     required this.title,
     required this.price,
-    required this.description});
+    required this.description,
+    required this.quantity,
+    required this.callback});
+  @override
+  OrderCardState createState() => OrderCardState(image, title, price, description, quantity, callback);
+}
+class OrderCardState extends State<OrderCard> {
+  String image;
+  String title;
+  String price;
+  String description;
+  int quantity;
+  void Function(bool, double) callback;
+  OrderCardState(this.image, this.title, this.price, this.description,this.quantity,  this.callback);
+  void increment() {
+    setState(() {
+      quantity++;
+      callback(true, double.parse(price));
+    });
+  }
 
-
+  void decrement() {
+    setState(() {
+      quantity != 0 ? callback(false, double.parse(price)): false;
+      quantity = quantity == 0 ? quantity : quantity-1;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,21 +100,24 @@ class ProductCard extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Row(
-                  children: [
-                    Flexible(
-                      child: Text(
-                        description,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  child: Center(
+                    child: Row(
+                      children: [
+                        ChangeAmountButton(onClicked: decrement, text: "-"),
+                        Text(quantity.toString(),
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: AppColors.black,
+                            fontWeight: FontWeight.bold,
+                          ),),
+                        ChangeAmountButton(onClicked: increment, text: "+"),
+                      ],
                     ),
-                  ],
-                )
+                  ),
+                ),
+                // : CustomButton(onClicked: () {}, text: "Buy"),
               ],
             ),
           ),

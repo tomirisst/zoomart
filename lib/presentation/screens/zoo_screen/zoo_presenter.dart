@@ -8,12 +8,22 @@ class ZooPresenter extends BasePresenter<ZooViewModel> {
 
   List<String> categories = [
     "All",
-    "Dogs",
-    "Birds",
-    "Lizards",
-    "Mices",
-    "Other",
+    "Dog",
+    "Cat",
+    "Bird",
+    "Lizard",
   ];
   Future<List<Pets>> pets = fetchPets();
-
+  List<Pets> changeCategory(String cat, List<Pets> pet) {
+    List<Pets> catPets = [];
+    if (cat != "All") {
+      pet.forEach((element) {
+        if (element.group == cat) {
+          catPets.add(element);
+        }
+      });
+      return catPets;
+    }
+    return pet;
+  }
 }

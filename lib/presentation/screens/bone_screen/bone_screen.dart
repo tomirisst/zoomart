@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:zoomart/presentation/screens/bone_screen/bone_presenter.dart';
 import 'package:zoomart/presentation/screens/bone_screen/bone_view_model.dart';
 import 'package:zoomart/presentation/screens/product_screen/product_screen.dart';
-import 'package:zoomart/presentation/services/api_manager.dart';
 
 import '../../../constants/app_colors.dart';
 import '../../base/base_screen_state.dart';
 import '../../components/product_card.dart';
-import '../../models/goods_model.dart';
 
 class BoneScreen extends StatefulWidget {
   const BoneScreen({Key? key}) : super(key: key);
@@ -20,9 +18,11 @@ class _BoneScreenState extends State<BoneScreen> {
   final BonePresenter _presenter = BonePresenter(BoneViewModel(ScreenState.none));
   //api
   List<Goods> goods = [];
+  List<Goods> catGoods = [];
 
   Future<void> getGoods() async {
     goods = await _presenter.products;
+    catGoods = goods;
     setState(() {});
     return;
   }
@@ -33,6 +33,12 @@ class _BoneScreenState extends State<BoneScreen> {
       getGoods();
     });
     super.initState();
+  }
+
+  void changeCategory(int catID) {
+    setState(() {
+      catGoods = _presenter.changeCategory(catID, goods);
+    });
   }
   //api
   @override
@@ -123,12 +129,21 @@ class _BoneScreenState extends State<BoneScreen> {
                       ],
                     ),
                     child: Center(
-                      child: Text(
-                        _presenter.categories[index],
-                        style: const TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          changeCategory(index);
+                        },
+                        child: Text(
+                          _presenter.categories[index],
+                          style: const TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(AppColors.background),
+                          elevation: MaterialStateProperty.all(0.0),
                         ),
                       ),
                     ),
@@ -141,9 +156,9 @@ class _BoneScreenState extends State<BoneScreen> {
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 padding: EdgeInsets.zero,
-                itemCount: goods.length,
+                itemCount: catGoods.length,
                 itemBuilder: (context, index) {
-                  var good = goods[index];
+                  var good = catGoods[index];
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -160,9 +175,6 @@ class _BoneScreenState extends State<BoneScreen> {
                       title: good.name!,
                       price: good.price!,
                       description: good.description!,
-                      showDesc: true,
-                      quantity: 1,
-                      callback: (bool , double ) {  },
                     ),
                   );
                 },
